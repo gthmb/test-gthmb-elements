@@ -1,0 +1,17 @@
+/* :host {
+    position: relative;
+    width: 100%;
+} */
+
+/* #container {
+} */
+
+/* #noise-holder {
+    position: relative;
+} */
+
+.noise-layer {
+    position: absolute;
+    user-select: none;
+    cursor: default;
+}
