@@ -15,7 +15,12 @@ export namespace Components {
     */
     'noiseLevel': number;
   }
-  interface ImgBrightness {}
+  interface ImgBrightness {
+    /**
+    * The level of the brightz
+    */
+    'dataBrightness': number;
+  }
 }
 
 declare global {
@@ -45,7 +50,12 @@ declare namespace LocalJSX {
     */
     'noiseLevel'?: number;
   }
-  interface ImgBrightness extends JSXBase.HTMLAttributes<HTMLImgBrightnessElement> {}
+  interface ImgBrightness extends JSXBase.HTMLAttributes<HTMLImgBrightnessElement> {
+    /**
+    * The level of the brightz
+    */
+    'dataBrightness'?: number;
+  }
 
   interface IntrinsicElements {
     'gthmb-noisey-node': GthmbNoiseyNode;

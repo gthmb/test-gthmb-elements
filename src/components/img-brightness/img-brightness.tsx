@@ -1,4 +1,4 @@
-import { Component, h, Listen, State } from '@stencil/core';
+import { Component, h, Listen, Prop, State } from '@stencil/core';
 import { BRIGHTNESS_4_SVG, BRIGHTNESS_7_SVG } from './img-brightness.icons';
 
 const MIN_BRIGHTNESS = 0.01;
@@ -13,10 +13,15 @@ const STEP_SIZE = 0.05;
 export class ImgBrightness {
     @State() brightness: number;
 
+    /**
+     * The level of the brightz
+     */
+    @Prop({ reflect: true }) dataBrightness: number;
+
     sliderInput: HTMLInputElement;
 
     componentWillLoad() {
-        this.brightness = 1;
+        this.setBrightness(1);
     }
 
     @Listen('keydown', { target: 'body' })
@@ -28,12 +33,18 @@ export class ImgBrightness {
         }
     }
 
+    private setBrightness = (brightness: number) => {
+        this.brightness = this.dataBrightness = brightness;
+    };
+
     decrement() {
-        this.brightness = Math.max(this.brightness - STEP_SIZE, MIN_BRIGHTNESS);
+        this.setBrightness(Math.max(this.brightness - STEP_SIZE, MIN_BRIGHTNESS));
     }
 
     increment() {
-        this.brightness = Math.min(this.brightness + STEP_SIZE, MAX_BRIGHTNESS);
+        this.setBrightness(
+            (this.dataBrightness = Math.min(this.brightness + STEP_SIZE, MAX_BRIGHTNESS))
+        );
     }
 
     updateBrightness() {
@@ -67,20 +78,3 @@ export class ImgBrightness {
         );
     }
 }
-
-interface IBar {
-    hello: string;
-    world: number;
-}
-
-type Foo<T = any> = T & {
-    bar: string;
-};
-
-const yo: Foo<IBar> = {
-    hello: 'world',
-    world: 12,
-    bar: 'baz'
-};
-
-console.log('yo', yo);
